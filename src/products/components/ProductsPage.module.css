@@ -1,0 +1,16 @@
+.products-list li {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 0.75rem;
+
+}
+
+.product-name {
+font-weight: 500;
+}
+
+.product-add-btn {
+font-size: 0.9rem;
+padding: 0.5rem 1rem;
+}

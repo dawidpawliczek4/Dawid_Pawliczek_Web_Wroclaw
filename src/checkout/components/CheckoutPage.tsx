@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import useCart from "../../cart/providers/useCart";
-import "./CheckoutPage.css";
+import styles from "./CheckoutPage.module.css";
 
 const CheckoutPage = () => {
   const { cart, total } = useCart();
@@ -9,14 +9,14 @@ const CheckoutPage = () => {
   };
 
   return (
-    <div className="checkout-container">
+    <div className={styles.checkoutContainer}>
       <h1>Podsumowanie zamówienia</h1>
 
       {cart.length === 0 ? (
         <p>Twój koszyk jest pusty.</p>
       ) : (
         <>
-          <table className="order-summary-table">
+          <table className={styles.orderSummaryTable}>
             <thead>
               <tr>
                 <th>Produkt</th>
@@ -49,10 +49,9 @@ const CheckoutPage = () => {
 
       <div className="actions">
         <Link to="/cart">
-          <button className="btn">Powrót do koszyka</button>
+          <button>Powrót do koszyka</button>
         </Link>
-        <button
-          className="btn"
+        <button          
           onClick={handleSubmit}
           disabled={cart.length === 0}
         >

@@ -5,7 +5,7 @@ import styles from "./CheckoutPage.module.css";
 const CheckoutPage = () => {
   const { cart, total } = useCart();
   const handleSubmit = () => {
-    window.location.href = "/confirmation.html";
+    window.location.href = `${import.meta.env.BASE_URL}confirmation.html`;
   };
 
   return (

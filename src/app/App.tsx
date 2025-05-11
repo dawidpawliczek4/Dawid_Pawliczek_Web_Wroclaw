@@ -5,7 +5,7 @@ import { CartProvider } from '../cart/providers/CartContext'
 
 const App = () => {
   return (
-    <HashRouter basename="/Dawid_Pawliczek_Web_Wroclaw">
+    <HashRouter>
       <CartProvider>
         <AppRoutes />
       </CartProvider>

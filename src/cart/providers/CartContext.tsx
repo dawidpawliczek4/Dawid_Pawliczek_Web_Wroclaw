@@ -13,7 +13,7 @@ type CartAction =
 const cartReducer = (state: CartItem[], action: CartAction) => {
     switch (action.type) {
         case "ADD_TO_CART": {
-            const existingItem = state.find(item => item.id === action.payload.id);
+            const existingItem = state.some(item => item.id === action.payload.id);
             if (existingItem) {
                 return state
             } else {
@@ -38,23 +38,23 @@ const cartReducer = (state: CartItem[], action: CartAction) => {
 export const CartContext = createContext<{
     cart: CartItem[];
     total: number;
-    addProduct: (item: CartItem) => void;
+    addProduct: (item: Product) => boolean;
     removeProduct: (id: number) => void;
     updateQuantity: (item: CartItem) => void;
 }>({
     cart: [],
     total: 0,
-    addProduct: () => { },
+    addProduct: () => false,
     removeProduct: () => { },
     updateQuantity: () => { }
 });
 
 const initialState = () => {
-    const cart = localStorage.getItem("cart");
-    if (cart) {        
-        return JSON.parse(cart);
-    } else {
-        return [];
+    try {
+        const cart = localStorage.getItem("cart");
+        return cart ? JSON.parse(cart) : [];
+    } catch {
+        return []
     }
 }
 
@@ -67,8 +67,13 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         localStorage.setItem("cart", JSON.stringify(cart));
     }, [cart]);
 
-    const addProduct = (product: Product) => {
+    const addProduct = (product: Product): boolean => {
+        const existingItem = cart.some(item => item.id === product.id);
+        if (existingItem) {
+            return false;
+        }
         dispatch({ type: "ADD_TO_CART", payload: product });
+        return true;
     };
 
     const removeProduct = (id: number) => {

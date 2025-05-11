@@ -2,9 +2,16 @@ import { Link } from 'react-router';
 import products from '../data/products.json';
 import useCart from '../../cart/providers/useCart';
 import styles from './ProductsPage.module.css';
+import type { Product } from '../types/Product';
 
 const ProductsPage = () => {
   const { addProduct } = useCart();
+
+  const handleAddProduct = (product: Product) => { 
+    if (addProduct(product)) {
+      alert('Produkt dodany do koszyka'); // TODO: replace with toast
+    }
+  }
 
   return (
     <div>
@@ -18,7 +25,7 @@ const ProductsPage = () => {
           {product.price.main},{product.price.fractional.toString().padStart(2, '0')} zł
         </span>              
         <button
-        onClick={() => addProduct({ ...product, quantity: 1 })}
+        onClick={() => handleAddProduct(product)}
         className={styles.productAddBtn}
         >
         Dodaj do koszyka

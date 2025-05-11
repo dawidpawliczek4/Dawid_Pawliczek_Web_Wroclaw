@@ -3,13 +3,16 @@ import products from '../data/products.json';
 import useCart from '../../cart/providers/useCart';
 import styles from './ProductsPage.module.css';
 import type { Product } from '../types/Product';
+import { toast } from 'react-toastify';
 
 const ProductsPage = () => {
   const { addProduct } = useCart();
 
   const handleAddProduct = (product: Product) => { 
     if (addProduct(product)) {
-      alert('Produkt dodany do koszyka'); // TODO: replace with toast
+      toast.success("Dodano produkt do koszyka")
+    } else {
+      toast.info("Produkt jest już w koszyku")
     }
   }
 

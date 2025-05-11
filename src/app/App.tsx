@@ -5,7 +5,7 @@ import { CartProvider } from '../cart/providers/CartContext'
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Dawid_Pawliczek_Web_Wroclaw">
       <CartProvider>
         <AppRoutes />
       </CartProvider>
